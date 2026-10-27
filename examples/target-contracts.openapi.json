@@ -1,0 +1,154 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Order Console API",
+    "version": "2.4.0",
+    "description": "Target contract the Lovable-generated UI must be migrated to."
+  },
+  "paths": {
+    "/orders": {
+      "get": {
+        "operationId": "listOrders",
+        "responses": {
+          "200": {
+            "description": "Orders, newest first",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Order" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createOrder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/Order" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created order",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{orderId}": {
+      "get": {
+        "operationId": "getOrder",
+        "responses": {
+          "200": {
+            "description": "Single order",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{orderId}/status": {
+      "patch": {
+        "operationId": "updateOrderStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["status"],
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "enum": ["pending", "paid", "shipped", "delivered", "cancelled"]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated order",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Order" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Customer": {
+        "type": "object",
+        "description": "Billing customer embedded on an order.",
+        "required": ["customerId", "name", "email", "tier"],
+        "properties": {
+          "customerId": { "type": "string", "format": "uuid" },
+          "name": { "type": "string" },
+          "email": { "type": "string", "format": "email" },
+          "tier": { "type": "string", "enum": ["bronze", "silver", "gold", "platinum"] }
+        }
+      },
+      "OrderAmounts": {
+        "type": "object",
+        "required": ["subtotal", "tax", "discount", "total", "currency"],
+        "properties": {
+          "subtotal": { "type": "number", "description": "Sum of line totals before tax and discount." },
+          "tax": { "type": "number", "description": "Server-computed tax per BR-002." },
+          "discount": { "type": "number", "description": "Discount amount, 0 when ineligible per BR-004." },
+          "total": { "type": "number", "description": "subtotal + tax - discount per BR-001." },
+          "currency": { "type": "string", "enum": ["USD", "EUR", "GBP"], "description": "ISO 4217 code per BR-005." }
+        }
+      },
+      "OrderLineItem": {
+        "type": "object",
+        "required": ["lineId", "productId", "sku", "quantity", "unitPrice", "lineTotal"],
+        "properties": {
+          "lineId": { "type": "string", "format": "uuid" },
+          "productId": { "type": "string", "format": "uuid" },
+          "sku": { "type": "string" },
+          "quantity": { "type": "integer", "minimum": 1 },
+          "unitPrice": { "type": "number" },
+          "lineTotal": { "type": "number" }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "required": ["orderId", "customer", "status", "lineItems", "amounts", "createdAt"],
+        "properties": {
+          "orderId": { "type": "string", "format": "uuid" },
+          "customer": { "$ref": "#/components/schemas/Customer" },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "paid", "shipped", "delivered", "cancelled"],
+            "description": "Lifecycle status; transitions guarded by BR-003."
+          },
+          "lineItems": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/OrderLineItem" }
+          },
+          "amounts": { "$ref": "#/components/schemas/OrderAmounts" },
+          "currency": { "type": "string", "enum": ["USD", "EUR", "GBP"], "description": "Top-level currency mirror per BR-005." },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "placedAt": { "type": "string", "format": "date-time", "nullable": true }
+        }
+      }
+    }
+  }
+}

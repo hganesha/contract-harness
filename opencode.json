@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "command": {
+    "contract-align": {
+      "description": "Run the contract alignment harness and summarize findings",
+      "template": "Run the project:contract-align workflow defined in .opencode/commands/contract-align.md with arguments: $ARGUMENTS"
+    },
+    "contract-execute": {
+      "description": "Execute the next migration tasks from outputs/05-tasks.json",
+      "template": "Run the project:contract-execute workflow defined in .opencode/commands/contract-execute.md with arguments: $ARGUMENTS"
+    }
+  }
+}

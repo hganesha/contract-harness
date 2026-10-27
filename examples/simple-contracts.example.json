@@ -1,0 +1,24 @@
+{
+  "comment": "Alternative to OpenAPI: the harness's minimal contract format.",
+  "entities": [
+    {
+      "name": "Order",
+      "description": "Sales order as exposed by the order service.",
+      "fields": [
+        { "name": "orderId", "type": "string", "required": true, "format": "uuid" },
+        { "name": "status", "type": "string", "required": true,
+          "enum": ["pending", "paid", "shipped", "delivered", "cancelled"],
+          "rule_ids": ["BR-003"] },
+        { "name": "amounts", "type": "object", "required": true, "ref": "OrderAmounts",
+          "rule_ids": ["BR-001", "BR-002", "BR-004"] },
+        { "name": "currency", "type": "string", "required": false,
+          "enum": ["USD", "EUR", "GBP"], "rule_ids": ["BR-005"] }
+      ]
+    }
+  ],
+  "endpoints": [
+    { "method": "GET", "path": "/orders", "response_entity": "Order" },
+    { "method": "PATCH", "path": "/orders/{orderId}/status",
+      "request_entity": "Order", "response_entity": "Order", "rule_ids": ["BR-003"] }
+  ]
+}

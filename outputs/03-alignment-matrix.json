@@ -1,0 +1,839 @@
+{
+  "alignments": [
+    {
+      "ui_contract": "Order",
+      "target_entity": "Order",
+      "match_confidence": 1.0,
+      "field_mappings": [
+        {
+          "ui_field": "id",
+          "ui_type": "string",
+          "target_field": "orderId",
+          "target_type": "string",
+          "status": "FIELD_RENAME",
+          "note": "rename 'id' -> 'orderId'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "customerName",
+          "ui_type": "string",
+          "target_field": "customer",
+          "target_type": "object",
+          "status": "TYPE_MISMATCH",
+          "note": "rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "status",
+          "ui_type": "string",
+          "target_field": "status",
+          "target_type": "string",
+          "status": "ENUM_NOT_ENFORCED",
+          "note": "target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "items",
+          "ui_type": "OrderItem[]",
+          "target_field": "lineItems",
+          "target_type": "object[]",
+          "status": "FIELD_RENAME",
+          "note": "rename 'items' -> 'lineItems'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "amounts",
+          "target_type": "object",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "currency",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "createdAt",
+          "ui_type": "string",
+          "target_field": "createdAt",
+          "target_type": "string",
+          "status": "MATCH",
+          "note": "target format constraint: date-time (validate at boundary)",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "updatedAt",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "placedAt",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "customerEmail",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "total",
+          "ui_type": "number",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "discountCode",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "notes",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "Order",
+          "field": "orderId",
+          "message": "rename 'id' -> 'orderId'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "TYPE_MISMATCH",
+          "entity": "Order",
+          "field": "customer",
+          "message": "customerName -> customer: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+          "evidence": [
+            "mock data in 3 records; samples=['Ada Lovelace', 'Grace Hopper', 'Alan Turing']; nullable=False",
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "ENUM_MISMATCH",
+          "entity": "Order",
+          "field": "status",
+          "message": "Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+          "evidence": [
+            "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+            "observed on field 'status'"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "ENUM_NOT_ENFORCED",
+          "entity": "Order",
+          "field": "status",
+          "message": "status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+          "evidence": [
+            "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "Order",
+          "field": "lineItems",
+          "message": "rename 'items' -> 'lineItems'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "Target field 'amounts' (object) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": [
+            "BR-001",
+            "BR-002",
+            "BR-004"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "currency",
+          "message": "Target field 'currency' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": [
+            "BR-005"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "REQUIRED_NOT_ENFORCED",
+          "entity": "Order",
+          "field": "createdAt",
+          "message": "'createdAt' is required but mock data contains null/missing values.",
+          "evidence": [
+            "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "info",
+          "code": "FORMAT_CONSTRAINT",
+          "entity": "Order",
+          "field": "createdAt",
+          "message": "target format constraint: date-time (validate at boundary)",
+          "evidence": [
+            "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "updatedAt",
+          "message": "Target field 'updatedAt' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "placedAt",
+          "message": "Target field 'placedAt' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "customerEmail",
+          "message": "'customerEmail' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "total",
+          "message": "'total' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "discountCode",
+          "message": "'discountCode' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "notes",
+          "message": "'notes' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-001 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Order grand total reconciliation"
+          ],
+          "rule_ids": [
+            "BR-001"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-002 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Tax calculation"
+          ],
+          "rule_ids": [
+            "BR-002"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "status",
+          "message": "BR-003 requires 'status' but the UI currently has enum_not_enforced (status).",
+          "evidence": [
+            "rule: Order status transition guard"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Discount eligibility"
+          ],
+          "rule_ids": [
+            "BR-004"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "currency",
+          "message": "BR-005 requires 'currency' but the UI currently has optional_missing (—).",
+          "evidence": [
+            "rule: Currency handling"
+          ],
+          "rule_ids": [
+            "BR-005"
+          ]
+        }
+      ]
+    },
+    {
+      "ui_contract": "OrderItem",
+      "target_entity": "OrderLineItem",
+      "match_confidence": 0.82,
+      "field_mappings": [
+        {
+          "ui_field": "id",
+          "ui_type": "string",
+          "target_field": "lineId",
+          "target_type": "string",
+          "status": "FIELD_RENAME",
+          "note": "rename 'id' -> 'lineId'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "productId",
+          "target_type": "string",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "sku",
+          "target_type": "string",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "qty",
+          "ui_type": "number",
+          "target_field": "quantity",
+          "target_type": "integer",
+          "status": "FIELD_RENAME",
+          "note": "rename 'qty' -> 'quantity'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "price",
+          "ui_type": "number",
+          "target_field": "unitPrice",
+          "target_type": "number",
+          "status": "FIELD_RENAME",
+          "note": "rename 'price' -> 'unitPrice'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "lineTotal",
+          "target_type": "number",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "name",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "lineId",
+          "message": "rename 'id' -> 'lineId'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "productId",
+          "message": "Target field 'productId' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "sku",
+          "message": "Target field 'sku' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "quantity",
+          "message": "rename 'qty' -> 'quantity'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "unitPrice",
+          "message": "rename 'price' -> 'unitPrice'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "lineTotal",
+          "message": "Target field 'lineTotal' (number) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "OrderLineItem",
+          "field": "name",
+          "message": "'name' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        }
+      ]
+    }
+  ],
+  "unmatched_ui_contracts": [
+    "StatusFilter",
+    "OrderListProps",
+    "OrderStatusBadgeProps",
+    "OrderSummaryProps"
+  ],
+  "unmatched_target_entities": [
+    "Customer",
+    "OrderAmounts"
+  ],
+  "findings": [
+    {
+      "severity": "medium",
+      "code": "FIELD_RENAME",
+      "entity": "Order",
+      "field": "orderId",
+      "message": "rename 'id' -> 'orderId'",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "TYPE_MISMATCH",
+      "entity": "Order",
+      "field": "customer",
+      "message": "customerName -> customer: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+      "evidence": [
+        "mock data in 3 records; samples=['Ada Lovelace', 'Grace Hopper', 'Alan Turing']; nullable=False",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "ENUM_MISMATCH",
+      "entity": "Order",
+      "field": "status",
+      "message": "Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+      "evidence": [
+        "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+        "observed on field 'status'"
+      ],
+      "rule_ids": [
+        "BR-003"
+      ]
+    },
+    {
+      "severity": "medium",
+      "code": "ENUM_NOT_ENFORCED",
+      "entity": "Order",
+      "field": "status",
+      "message": "status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+      "evidence": [
+        "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": [
+        "BR-003"
+      ]
+    },
+    {
+      "severity": "medium",
+      "code": "FIELD_RENAME",
+      "entity": "Order",
+      "field": "lineItems",
+      "message": "rename 'items' -> 'lineItems'",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "REQUIRED_MISSING",
+      "entity": "Order",
+      "field": "amounts",
+      "message": "Target field 'amounts' (object) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": [
+        "BR-001",
+        "BR-002",
+        "BR-004"
+      ]
+    },
+    {
+      "severity": "medium",
+      "code": "OPTIONAL_MISSING",
+      "entity": "Order",
+      "field": "currency",
+      "message": "Target field 'currency' (string) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": [
+        "BR-005"
+      ]
+    },
+    {
+      "severity": "medium",
+      "code": "REQUIRED_NOT_ENFORCED",
+      "entity": "Order",
+      "field": "createdAt",
+      "message": "'createdAt' is required but mock data contains null/missing values.",
+      "evidence": [
+        "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "info",
+      "code": "FORMAT_CONSTRAINT",
+      "entity": "Order",
+      "field": "createdAt",
+      "message": "target format constraint: date-time (validate at boundary)",
+      "evidence": [
+        "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "medium",
+      "code": "OPTIONAL_MISSING",
+      "entity": "Order",
+      "field": "updatedAt",
+      "message": "Target field 'updatedAt' (string) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": []
+    },
+    {
+      "severity": "medium",
+      "code": "OPTIONAL_MISSING",
+      "entity": "Order",
+      "field": "placedAt",
+      "message": "Target field 'placedAt' (string) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": []
+    },
+    {
+      "severity": "low",
+      "code": "UI_ONLY_FIELD",
+      "entity": "Order",
+      "field": "customerEmail",
+      "message": "'customerEmail' exists only in UI dummy data and has no target contract field.",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "low",
+      "code": "UI_ONLY_FIELD",
+      "entity": "Order",
+      "field": "total",
+      "message": "'total' exists only in UI dummy data and has no target contract field.",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "low",
+      "code": "UI_ONLY_FIELD",
+      "entity": "Order",
+      "field": "discountCode",
+      "message": "'discountCode' exists only in UI dummy data and has no target contract field.",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "low",
+      "code": "UI_ONLY_FIELD",
+      "entity": "Order",
+      "field": "notes",
+      "message": "'notes' exists only in UI dummy data and has no target contract field.",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Order",
+      "field": "amounts",
+      "message": "BR-001 requires 'amounts' but the UI currently has required_missing (—).",
+      "evidence": [
+        "rule: Order grand total reconciliation"
+      ],
+      "rule_ids": [
+        "BR-001"
+      ]
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Order",
+      "field": "amounts",
+      "message": "BR-002 requires 'amounts' but the UI currently has required_missing (—).",
+      "evidence": [
+        "rule: Tax calculation"
+      ],
+      "rule_ids": [
+        "BR-002"
+      ]
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Order",
+      "field": "status",
+      "message": "BR-003 requires 'status' but the UI currently has enum_not_enforced (status).",
+      "evidence": [
+        "rule: Order status transition guard"
+      ],
+      "rule_ids": [
+        "BR-003"
+      ]
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Order",
+      "field": "amounts",
+      "message": "BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+      "evidence": [
+        "rule: Discount eligibility"
+      ],
+      "rule_ids": [
+        "BR-004"
+      ]
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Order",
+      "field": "currency",
+      "message": "BR-005 requires 'currency' but the UI currently has optional_missing (—).",
+      "evidence": [
+        "rule: Currency handling"
+      ],
+      "rule_ids": [
+        "BR-005"
+      ]
+    },
+    {
+      "severity": "medium",
+      "code": "FIELD_RENAME",
+      "entity": "OrderLineItem",
+      "field": "lineId",
+      "message": "rename 'id' -> 'lineId'",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "REQUIRED_MISSING",
+      "entity": "OrderLineItem",
+      "field": "productId",
+      "message": "Target field 'productId' (string) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "REQUIRED_MISSING",
+      "entity": "OrderLineItem",
+      "field": "sku",
+      "message": "Target field 'sku' (string) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": []
+    },
+    {
+      "severity": "medium",
+      "code": "FIELD_RENAME",
+      "entity": "OrderLineItem",
+      "field": "quantity",
+      "message": "rename 'qty' -> 'quantity'",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "medium",
+      "code": "FIELD_RENAME",
+      "entity": "OrderLineItem",
+      "field": "unitPrice",
+      "message": "rename 'price' -> 'unitPrice'",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "REQUIRED_MISSING",
+      "entity": "OrderLineItem",
+      "field": "lineTotal",
+      "message": "Target field 'lineTotal' (number) is not represented in the UI.",
+      "evidence": [],
+      "rule_ids": []
+    },
+    {
+      "severity": "low",
+      "code": "UI_ONLY_FIELD",
+      "entity": "OrderLineItem",
+      "field": "name",
+      "message": "'name' exists only in UI dummy data and has no target contract field.",
+      "evidence": [
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+      ],
+      "rule_ids": []
+    },
+    {
+      "severity": "high",
+      "code": "RULE_FIELD_GAP",
+      "entity": "Customer",
+      "field": "*",
+      "message": "BR-004 applies to 'Customer', which has no matching UI contract or mock data yet.",
+      "evidence": [
+        "rule: Discount eligibility"
+      ],
+      "rule_ids": [
+        "BR-004"
+      ]
+    }
+  ]
+}

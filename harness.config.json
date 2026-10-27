@@ -1,0 +1,14 @@
+{
+  "app_path": "examples/lovable-app",
+  "requirements": "examples/requirements.md",
+  "rules": "examples/business-rules.md",
+  "contracts": "examples/target-contracts.openapi.json",
+  "output_dir": "outputs",
+  "llm": {
+    "enabled": false,
+    "base_url": "http://localhost:11434/v1",
+    "api_key_env": "OPENAI_API_KEY",
+    "model": "gpt-4o-mini",
+    "timeout": 60
+  }
+}

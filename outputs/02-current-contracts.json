@@ -1,0 +1,485 @@
+{
+  "ui_contracts": [
+    {
+      "name": "OrderItem",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "id",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "name",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "price",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "qty",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 2,
+      "inferred": false
+    },
+    {
+      "name": "Order",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "id",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "customerName",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "customerEmail",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "items",
+          "type_raw": "OrderItem[]",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "OrderItem",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "status",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "total",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "discountCode",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": false,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "notes",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": false,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "createdAt",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 9,
+      "inferred": false
+    },
+    {
+      "name": "StatusFilter",
+      "kind": "enum",
+      "fields": [],
+      "enum_values": [
+        "all",
+        "pending",
+        "shipped"
+      ],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 21,
+      "inferred": false
+    },
+    {
+      "name": "OrderListProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "filter",
+          "type_raw": "StatusFilter",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "StatusFilter",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+          "line": 6
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "line": 6,
+      "inferred": false
+    },
+    {
+      "name": "OrderStatusBadgeProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "status",
+          "type_raw": "Order[\"status\"]",
+          "kind": "any",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+          "line": 3
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+      "line": 3,
+      "inferred": false
+    },
+    {
+      "name": "OrderSummaryProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "order",
+          "type_raw": "Order",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "Order",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+          "line": 3
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "line": 3,
+      "inferred": false
+    }
+  ],
+  "mock_datasets": [
+    {
+      "name": "mockOrders",
+      "entity": "Order",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+      "annotation": "Order[]",
+      "records": 3,
+      "fields": [
+        {
+          "name": "id",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "ord-1001",
+            "ord-1002",
+            "ord-1003"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "customerName",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "Ada Lovelace",
+            "Grace Hopper",
+            "Alan Turing"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "customerEmail",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "ada@example.com",
+            "grace@example.com",
+            "alan@example.com"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "items",
+          "observed_types": [
+            "array"
+          ],
+          "samples": [
+            "[{\"id\": \"i-1\", \"name\": \"Mechanical keyboard\", \"…",
+            "[{\"id\": \"i-3\", \"name\": \"Compiler science mug\", …",
+            "[{\"id\": \"i-4\", \"name\": \"Enigma puzzle set\", \"pr…"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "status",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "pending",
+            "refunded",
+            "shipped"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "total",
+          "observed_types": [
+            "number"
+          ],
+          "samples": [
+            "139.99",
+            "55.5",
+            "48.71"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "discountCode",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "SAVE10"
+          ],
+          "nullable": true,
+          "present_in": 1,
+          "records": 3
+        },
+        {
+          "name": "notes",
+          "observed_types": [
+            "string",
+            "null"
+          ],
+          "samples": [
+            "Leave at front desk"
+          ],
+          "nullable": true,
+          "present_in": 2,
+          "records": 3
+        },
+        {
+          "name": "createdAt",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "2026-10-01T14:22:00Z",
+            "2026-10-18T09:05:00Z"
+          ],
+          "nullable": true,
+          "present_in": 2,
+          "records": 3
+        }
+      ]
+    }
+  ],
+  "api_calls": [
+    {
+      "file": "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts",
+      "line": 12,
+      "client": "supabase",
+      "method": "SELECT",
+      "target": "orders",
+      "snippet": ".from(\"orders\").select(\"*\").limit(50);"
+    },
+    {
+      "file": "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts",
+      "line": 17,
+      "client": "supabase",
+      "method": "UPDATE",
+      "target": "orders",
+      "snippet": ".from(\"orders\").update({ status }).eq(\"id\", id);"
+    }
+  ],
+  "components": [
+    {
+      "name": "OrderList",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "props": [
+        "filter"
+      ],
+      "imports": [
+        "../data/mock-orders -> src/data/mock-orders.ts",
+        "./OrderStatusBadge -> src/components/OrderStatusBadge.tsx",
+        "./OrderSummary -> src/components/OrderSummary.tsx",
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "OrderListProps",
+        "StatusFilter"
+      ],
+      "mock_used": [
+        "mockOrders"
+      ],
+      "api_used": [],
+      "field_accesses": [
+        "createdAt",
+        "customerEmail",
+        "customerName",
+        "filter",
+        "id",
+        "items",
+        "name",
+        "price",
+        "qty",
+        "status"
+      ]
+    },
+    {
+      "name": "OrderStatusBadge",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+      "props": [
+        "status"
+      ],
+      "imports": [
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "Order",
+        "OrderStatusBadgeProps"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": []
+    },
+    {
+      "name": "OrderSummary",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "props": [
+        "order"
+      ],
+      "imports": [
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "Order",
+        "OrderSummaryProps"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": [
+        "discountCode",
+        "items",
+        "notes",
+        "qty",
+        "total"
+      ]
+    },
+    {
+      "name": "OrdersPage",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/pages/OrdersPage.tsx",
+      "props": [],
+      "imports": [
+        "react -> pkg:react",
+        "../components/OrderList -> src/components/OrderList.tsx",
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "StatusFilter"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": []
+    }
+  ]
+}

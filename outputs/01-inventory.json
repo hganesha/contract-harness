@@ -1,0 +1,526 @@
+{
+  "inputs": {
+    "app_path": "/home/user/contract-harness/examples/lovable-app",
+    "requirements": "/home/user/contract-harness/examples/requirements.md",
+    "rules": "/home/user/contract-harness/examples/business-rules.md",
+    "contracts": "/home/user/contract-harness/examples/target-contracts.openapi.json"
+  },
+  "inventory": {
+    "code_files": 8,
+    "ts_files": 7,
+    "json_files": 1,
+    "component_files": 3,
+    "page_files": 1,
+    "data_files": 1,
+    "type_files": 1,
+    "lib_files": 1
+  },
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "View the order list",
+      "body": "As an ops user I need a list of all orders so I can see what is in the pipeline.\n\n- [ ] The list shows every order returned by `GET /orders`, newest first\n- [ ] Each row shows order id, customer name, status and the grand total\n- [ ] Orders can be filtered by status using the full backend status enum",
+      "acceptance": [
+        "The list shows every order returned by `GET /orders`, newest first",
+        "Each row shows order id, customer name, status and the grand total",
+        "Orders can be filtered by status using the full backend status enum"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-002",
+      "title": "Inspect an order's detail",
+      "body": "As an ops user I need to drill into an Order to see its customer, line items and money breakdown.\n\n- [ ] Detail view shows the nested customer object, all line items and the `amounts` breakdown\n- [ ] Line items show SKU, quantity, unit price and line total",
+      "acceptance": [
+        "Detail view shows the nested customer object, all line items and the `amounts` breakdown",
+        "Line items show SKU, quantity, unit price and line total"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-003",
+      "title": "Manage the order status workflow",
+      "body": "As an ops user I need to move an Order through its lifecycle without violating allowed transitions.\n\n- [ ] Only legal status transitions for the current status are offered as actions\n- [ ] A cancelled order shows a distinct badge and cannot be re-opened",
+      "acceptance": [
+        "Only legal status transitions for the current status are offered as actions",
+        "A cancelled order shows a distinct badge and cannot be re-opened"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-004",
+      "title": "Display the money breakdown including tax",
+      "body": "As an ops user I need subtotal, tax, discount and total shown separately.\n\n- [ ] All four amounts from `Order.amounts` are rendered with ISO currency formatting\n- [ ] Totals reconcile to the business-rule calculation",
+      "acceptance": [
+        "All four amounts from `Order.amounts` are rendered with ISO currency formatting",
+        "Totals reconcile to the business-rule calculation"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-005",
+      "title": "Apply discount eligibility for premium customers",
+      "body": "As a billing user I need discounts restricted to customers whose tier allows them.\n\n- [ ] Discount controls are disabled unless the customer tier is `gold` or `platinum`\n- [ ] Attempting an ineligible discount surfaces a validation error referencing the rule",
+      "acceptance": [
+        "Discount controls are disabled unless the customer tier is `gold` or `platinum`",
+        "Attempting an ineligible discount surfaces a validation error referencing the rule"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-001",
+      "title": "Order grand total reconciliation",
+      "description": "The order grand total must equal subtotal plus tax minus discount. The UI must render the server-computed amounts rather than recomputing them client-side.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.amounts"
+      ],
+      "acceptance": [
+        "given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+        "given a missing amounts object, when the order renders, then a safe placeholder is shown"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-002",
+      "title": "Tax calculation",
+      "description": "Tax is computed by the billing service at the prevailing rate on (subtotal minus discount); the UI never calculates tax itself.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.amounts"
+      ],
+      "acceptance": [
+        "given any order, when displayed, then the tax value shown is exactly the value from the contract payload"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-003",
+      "title": "Order status transition guard",
+      "description": "Allowed transitions are pending -> paid -> shipped -> delivered. An order may be cancelled only from pending or paid. Any other transition is rejected.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.status"
+      ],
+      "acceptance": [
+        "given a pending order, when acting on it, then only paid and cancelled are offered",
+        "given a delivered order, when acting on it, then no transitions are offered",
+        "given an unknown status value, when rendering, then a fallback badge is shown without crashing"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-004",
+      "title": "Discount eligibility",
+      "description": "A discount may be applied only when the linked customer's tier is `gold` or `platinum`; silver and bronze customers are ineligible.",
+      "applies_to": [
+        "Order",
+        "Customer"
+      ],
+      "requires_fields": [
+        "Order.amounts",
+        "Customer.tier"
+      ],
+      "acceptance": [
+        "given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+        "given a gold customer, when a discount is applied, then amounts.discount is reflected in the total"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-005",
+      "title": "Currency handling",
+      "description": "All monetary values are expressed using an ISO 4217 currency code; `USD` is the default when the backend omits the field. Money is formatted with that code.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.currency"
+      ],
+      "acceptance": [
+        "given currency USD, when totals render, then they use USD currency formatting",
+        "given a missing currency, when totals render, then USD is assumed"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    }
+  ],
+  "target_entities": [
+    {
+      "name": "Customer",
+      "fields": [
+        {
+          "name": "customerId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "email",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "tier",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "bronze",
+            "silver",
+            "gold",
+            "platinum"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "Billing customer embedded on an order.",
+      "source": "openapi:/components/schemas/Customer"
+    },
+    {
+      "name": "OrderAmounts",
+      "fields": [
+        {
+          "name": "subtotal",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Sum of line totals before tax and discount.",
+          "rule_ids": []
+        },
+        {
+          "name": "tax",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Server-computed tax per BR-002.",
+          "rule_ids": []
+        },
+        {
+          "name": "discount",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Discount amount, 0 when ineligible per BR-004.",
+          "rule_ids": []
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "subtotal + tax - discount per BR-001.",
+          "rule_ids": []
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "USD",
+            "EUR",
+            "GBP"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "ISO 4217 code per BR-005.",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/OrderAmounts"
+    },
+    {
+      "name": "OrderLineItem",
+      "fields": [
+        {
+          "name": "lineId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "unitPrice",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "lineTotal",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/OrderLineItem"
+    },
+    {
+      "name": "Order",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "customer",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "Customer",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "pending",
+            "paid",
+            "shipped",
+            "delivered",
+            "cancelled"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Lifecycle status; transitions guarded by BR-003.",
+          "rule_ids": []
+        },
+        {
+          "name": "lineItems",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "OrderLineItem",
+          "is_array": true,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "amounts",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "OrderAmounts",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "USD",
+            "EUR",
+            "GBP"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Top-level currency mirror per BR-005.",
+          "rule_ids": []
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": false,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "placedAt",
+          "type": "string",
+          "required": false,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": true,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/Order"
+    }
+  ],
+  "target_endpoints": [
+    {
+      "method": "GET",
+      "path": "/orders",
+      "operation_id": "listOrders",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "operation_id": "createOrder",
+      "request_entity": "Order",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{orderId}",
+      "operation_id": "getOrder",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "PATCH",
+      "path": "/orders/{orderId}/status",
+      "operation_id": "updateOrderStatus",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    }
+  ]
+}

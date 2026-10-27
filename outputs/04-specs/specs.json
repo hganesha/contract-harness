@@ -1,0 +1,329 @@
+[
+  {
+    "spec_id": "SPEC-E01",
+    "title": "Align Order with target contract Order",
+    "scope": "entity",
+    "target_entity": "Order",
+    "current_state": "UI contract `Order` (declared) matched target `Order` with confidence 1.0. 20 finding(s).",
+    "target_state": "Implement `Order` exactly as defined in openapi:/components/schemas/Order (9 fields).",
+    "changes": [
+      "Rename `id` to `orderId` (type stays compatible).",
+      "Introduce an adapter for `customerName` -> `customer`: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+      "Constrain `status` to the target enum and update badge/select logic: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+      "Rename `items` to `lineItems` (type stays compatible).",
+      "Add `amounts: object` (required) and surface it in the UI.",
+      "Add `currency: string` (optional) and surface it in the UI.",
+      "Add `updatedAt: string` (optional) and surface it in the UI.",
+      "Add `placedAt: string` (optional) and surface it in the UI.",
+      "Remove or explicitly remap dummy-only field `customerEmail`.",
+      "Remove or explicitly remap dummy-only field `total`.",
+      "Remove or explicitly remap dummy-only field `discountCode`.",
+      "Remove or explicitly remap dummy-only field `notes`."
+    ],
+    "files": [
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+      "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+    ],
+    "acceptance_criteria": [
+      "All target enum values are rendered; unknown values fall back safely.",
+      "BR-001: given a missing amounts object, when the order renders, then a safe placeholder is shown",
+      "BR-001: given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+      "BR-002: given any order, when displayed, then the tax value shown is exactly the value from the contract payload",
+      "BR-003: given a delivered order, when acting on it, then no transitions are offered",
+      "BR-003: given a pending order, when acting on it, then only paid and cancelled are offered",
+      "BR-003: given an unknown status value, when rendering, then a fallback badge is shown without crashing",
+      "BR-004: given a gold customer, when a discount is applied, then amounts.discount is reflected in the total",
+      "BR-004: given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+      "BR-005: given a missing currency, when totals render, then USD is assumed",
+      "BR-005: given currency USD, when totals render, then they use USD currency formatting",
+      "Component renders a non-crashing value for `amounts` for empty, loading and populated states.",
+      "Component renders a non-crashing value for `currency` for empty, loading and populated states.",
+      "Component renders a non-crashing value for `placedAt` for empty, loading and populated states.",
+      "Component renders a non-crashing value for `updatedAt` for empty, loading and populated states.",
+      "No remaining reference to legacy field `id`.",
+      "No remaining reference to legacy field `items`.",
+      "Unit test covers conversion `customerName` -> `customer`."
+    ],
+    "rule_ids": [
+      "BR-001",
+      "BR-002",
+      "BR-003",
+      "BR-004",
+      "BR-005"
+    ],
+    "requirement_ids": [
+      "REQ-001",
+      "REQ-002",
+      "REQ-003",
+      "REQ-004"
+    ],
+    "evidence": [
+      "FIELD_RENAME: rename 'id' -> 'orderId'",
+      "TYPE_MISMATCH: customerName -> customer: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+      "ENUM_MISMATCH: Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+      "ENUM_NOT_ENFORCED: status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+      "FIELD_RENAME: rename 'items' -> 'lineItems'",
+      "REQUIRED_MISSING: Target field 'amounts' (object) is not represented in the UI.",
+      "OPTIONAL_MISSING: Target field 'currency' (string) is not represented in the UI.",
+      "REQUIRED_NOT_ENFORCED: 'createdAt' is required but mock data contains null/missing values.",
+      "FORMAT_CONSTRAINT: target format constraint: date-time (validate at boundary)",
+      "OPTIONAL_MISSING: Target field 'updatedAt' (string) is not represented in the UI.",
+      "OPTIONAL_MISSING: Target field 'placedAt' (string) is not represented in the UI.",
+      "UI_ONLY_FIELD: 'customerEmail' exists only in UI dummy data and has no target contract field.",
+      "UI_ONLY_FIELD: 'total' exists only in UI dummy data and has no target contract field.",
+      "UI_ONLY_FIELD: 'discountCode' exists only in UI dummy data and has no target contract field.",
+      "UI_ONLY_FIELD: 'notes' exists only in UI dummy data and has no target contract field.",
+      "RULE_FIELD_GAP: BR-001 requires 'amounts' but the UI currently has required_missing (—).",
+      "RULE_FIELD_GAP: BR-002 requires 'amounts' but the UI currently has required_missing (—).",
+      "RULE_FIELD_GAP: BR-003 requires 'status' but the UI currently has enum_not_enforced (status).",
+      "RULE_FIELD_GAP: BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+      "RULE_FIELD_GAP: BR-005 requires 'currency' but the UI currently has optional_missing (—)."
+    ]
+  },
+  {
+    "spec_id": "SPEC-E02",
+    "title": "Align OrderItem with target contract OrderLineItem",
+    "scope": "entity",
+    "target_entity": "OrderLineItem",
+    "current_state": "UI contract `OrderItem` (declared) matched target `OrderLineItem` with confidence 0.82. 7 finding(s).",
+    "target_state": "Implement `OrderLineItem` exactly as defined in openapi:/components/schemas/OrderLineItem (6 fields).",
+    "changes": [
+      "Rename `id` to `lineId` (type stays compatible).",
+      "Add `productId: string` (required) and surface it in the UI.",
+      "Add `sku: string` (required) and surface it in the UI.",
+      "Rename `qty` to `quantity` (type stays compatible).",
+      "Rename `price` to `unitPrice` (type stays compatible).",
+      "Add `lineTotal: number` (required) and surface it in the UI.",
+      "Remove or explicitly remap dummy-only field `name`."
+    ],
+    "files": [
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+    ],
+    "acceptance_criteria": [
+      "Component renders a non-crashing value for `lineTotal` for empty, loading and populated states.",
+      "Component renders a non-crashing value for `productId` for empty, loading and populated states.",
+      "Component renders a non-crashing value for `sku` for empty, loading and populated states.",
+      "No remaining reference to legacy field `id`.",
+      "No remaining reference to legacy field `price`.",
+      "No remaining reference to legacy field `qty`."
+    ],
+    "rule_ids": [],
+    "requirement_ids": [],
+    "evidence": [
+      "FIELD_RENAME: rename 'id' -> 'lineId'",
+      "REQUIRED_MISSING: Target field 'productId' (string) is not represented in the UI.",
+      "REQUIRED_MISSING: Target field 'sku' (string) is not represented in the UI.",
+      "FIELD_RENAME: rename 'qty' -> 'quantity'",
+      "FIELD_RENAME: rename 'price' -> 'unitPrice'",
+      "REQUIRED_MISSING: Target field 'lineTotal' (number) is not represented in the UI.",
+      "UI_ONLY_FIELD: 'name' exists only in UI dummy data and has no target contract field."
+    ]
+  },
+  {
+    "spec_id": "SPEC-C01",
+    "title": "Migrate component OrderList to live contracts",
+    "scope": "component",
+    "target_entity": "",
+    "current_state": "OrderList uses mock data=['mockOrders'], api=none, contracts=['OrderListProps', 'StatusFilter'].",
+    "target_state": "Component is presentational; data arrives via typed query hooks.",
+    "changes": [
+      "Remove mock import(s) mockOrders and source data from the real API client / query hook instead.",
+      "Update field access `id` -> `orderId` on Order (FIELD_RENAME).",
+      "Update field access `id` -> `lineId` on OrderLineItem (FIELD_RENAME).",
+      "Update field access `customerName` -> `customer` on Order (TYPE_MISMATCH).",
+      "Update field access `items` -> `lineItems` on Order (FIELD_RENAME).",
+      "Update field access `qty` -> `quantity` on OrderLineItem (FIELD_RENAME).",
+      "Update field access `price` -> `unitPrice` on OrderLineItem (FIELD_RENAME).",
+      "Add loading, error and empty states (mock data never exercises them)."
+    ],
+    "files": [
+      "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx"
+    ],
+    "acceptance_criteria": [
+      "Renders against a real-contract fixture without dummy imports.",
+      "Loading, error and empty states verified."
+    ],
+    "rule_ids": [],
+    "requirement_ids": [],
+    "evidence": [
+      "props: filter"
+    ]
+  },
+  {
+    "spec_id": "SPEC-X01",
+    "title": "Align API client layer with target endpoints",
+    "scope": "cross_cutting",
+    "target_entity": "",
+    "current_state": "Detected 2 call site(s); 4 target endpoint(s).",
+    "target_state": "Typed client functions covering every target endpoint with contract-validated IO.",
+    "changes": [
+      "Add typed client call for GET /orders (entity: Order).",
+      "Add typed client call for POST /orders (entity: Order).",
+      "Add typed client call for GET /orders/{orderId} (entity: Order).",
+      "Add typed client call for PATCH /orders/{orderId}/status (entity: Order)."
+    ],
+    "files": [
+      "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+    ],
+    "acceptance_criteria": [
+      "Each target endpoint has exactly one typed client function.",
+      "Runtime schema validation (zod/valibot or equivalent) on every response."
+    ],
+    "rule_ids": [],
+    "requirement_ids": [],
+    "evidence": []
+  },
+  {
+    "spec_id": "SPEC-R01",
+    "title": "Implement business rule BR-001 — Order grand total reconciliation",
+    "scope": "cross_cutting",
+    "target_entity": "Order",
+    "current_state": "The order grand total must equal subtotal plus tax minus discount. The UI must render the server-computed amounts rather than recomputing them client-side.",
+    "target_state": "Rule BR-001 enforced and covered by automated tests.",
+    "changes": [
+      "Encode BR-001 in the domain/adapter layer (keep it out of presentational components).",
+      "Required fields: Order.amounts."
+    ],
+    "files": [],
+    "acceptance_criteria": [
+      "given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+      "given a missing amounts object, when the order renders, then a safe placeholder is shown"
+    ],
+    "rule_ids": [
+      "BR-001"
+    ],
+    "requirement_ids": [
+      "REQ-001",
+      "REQ-002",
+      "REQ-003",
+      "REQ-004",
+      "REQ-005"
+    ],
+    "evidence": [
+      "Target field 'amounts' (object) is not represented in the UI.",
+      "BR-001 requires 'amounts' but the UI currently has required_missing (—)."
+    ]
+  },
+  {
+    "spec_id": "SPEC-R02",
+    "title": "Implement business rule BR-002 — Tax calculation",
+    "scope": "cross_cutting",
+    "target_entity": "Order",
+    "current_state": "Tax is computed by the billing service at the prevailing rate on (subtotal minus discount); the UI never calculates tax itself.",
+    "target_state": "Rule BR-002 enforced and covered by automated tests.",
+    "changes": [
+      "Encode BR-002 in the domain/adapter layer (keep it out of presentational components).",
+      "Required fields: Order.amounts."
+    ],
+    "files": [],
+    "acceptance_criteria": [
+      "given any order, when displayed, then the tax value shown is exactly the value from the contract payload"
+    ],
+    "rule_ids": [
+      "BR-002"
+    ],
+    "requirement_ids": [
+      "REQ-004",
+      "REQ-005"
+    ],
+    "evidence": [
+      "BR-002 requires 'amounts' but the UI currently has required_missing (—)."
+    ]
+  },
+  {
+    "spec_id": "SPEC-R03",
+    "title": "Implement business rule BR-003 — Order status transition guard",
+    "scope": "cross_cutting",
+    "target_entity": "Order",
+    "current_state": "Allowed transitions are pending -> paid -> shipped -> delivered. An order may be cancelled only from pending or paid. Any other transition is rejected.",
+    "target_state": "Rule BR-003 enforced and covered by automated tests.",
+    "changes": [
+      "Encode BR-003 in the domain/adapter layer (keep it out of presentational components).",
+      "Required fields: Order.status."
+    ],
+    "files": [],
+    "acceptance_criteria": [
+      "given a pending order, when acting on it, then only paid and cancelled are offered",
+      "given a delivered order, when acting on it, then no transitions are offered",
+      "given an unknown status value, when rendering, then a fallback badge is shown without crashing"
+    ],
+    "rule_ids": [
+      "BR-003"
+    ],
+    "requirement_ids": [
+      "REQ-001",
+      "REQ-002",
+      "REQ-003",
+      "REQ-004"
+    ],
+    "evidence": [
+      "Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+      "status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+      "BR-003 requires 'status' but the UI currently has enum_not_enforced (status)."
+    ]
+  },
+  {
+    "spec_id": "SPEC-R04",
+    "title": "Implement business rule BR-004 — Discount eligibility",
+    "scope": "cross_cutting",
+    "target_entity": "Order, Customer",
+    "current_state": "A discount may be applied only when the linked customer's tier is `gold` or `platinum`; silver and bronze customers are ineligible.",
+    "target_state": "Rule BR-004 enforced and covered by automated tests.",
+    "changes": [
+      "Encode BR-004 in the domain/adapter layer (keep it out of presentational components).",
+      "Required fields: Order.amounts, Customer.tier."
+    ],
+    "files": [],
+    "acceptance_criteria": [
+      "given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+      "given a gold customer, when a discount is applied, then amounts.discount is reflected in the total"
+    ],
+    "rule_ids": [
+      "BR-004"
+    ],
+    "requirement_ids": [
+      "REQ-001",
+      "REQ-002",
+      "REQ-004",
+      "REQ-005"
+    ],
+    "evidence": [
+      "BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+      "BR-004 applies to 'Customer', which has no matching UI contract or mock data yet."
+    ]
+  },
+  {
+    "spec_id": "SPEC-R05",
+    "title": "Implement business rule BR-005 — Currency handling",
+    "scope": "cross_cutting",
+    "target_entity": "Order",
+    "current_state": "All monetary values are expressed using an ISO 4217 currency code; `USD` is the default when the backend omits the field. Money is formatted with that code.",
+    "target_state": "Rule BR-005 enforced and covered by automated tests.",
+    "changes": [
+      "Encode BR-005 in the domain/adapter layer (keep it out of presentational components).",
+      "Required fields: Order.currency."
+    ],
+    "files": [],
+    "acceptance_criteria": [
+      "given currency USD, when totals render, then they use USD currency formatting",
+      "given a missing currency, when totals render, then USD is assumed"
+    ],
+    "rule_ids": [
+      "BR-005"
+    ],
+    "requirement_ids": [
+      "REQ-001",
+      "REQ-002",
+      "REQ-004"
+    ],
+    "evidence": [
+      "Target field 'currency' (string) is not represented in the UI.",
+      "BR-005 requires 'currency' but the UI currently has optional_missing (—)."
+    ]
+  }
+]

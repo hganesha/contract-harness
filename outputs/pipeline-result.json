@@ -1,0 +1,2186 @@
+{
+  "inventory": {
+    "code_files": 8,
+    "ts_files": 7,
+    "json_files": 1,
+    "component_files": 3,
+    "page_files": 1,
+    "data_files": 1,
+    "type_files": 1,
+    "lib_files": 1
+  },
+  "ui_contracts": [
+    {
+      "name": "OrderItem",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "id",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "name",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "price",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        },
+        {
+          "name": "qty",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 2
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 2,
+      "inferred": false
+    },
+    {
+      "name": "Order",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "id",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "customerName",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "customerEmail",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "items",
+          "type_raw": "OrderItem[]",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "OrderItem",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "status",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "total",
+          "type_raw": "number",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "discountCode",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": false,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "notes",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": false,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        },
+        {
+          "name": "createdAt",
+          "type_raw": "string",
+          "kind": "primitive",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+          "line": 9
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 9,
+      "inferred": false
+    },
+    {
+      "name": "StatusFilter",
+      "kind": "enum",
+      "fields": [],
+      "enum_values": [
+        "all",
+        "pending",
+        "shipped"
+      ],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/types/index.ts",
+      "line": 21,
+      "inferred": false
+    },
+    {
+      "name": "OrderListProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "filter",
+          "type_raw": "StatusFilter",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "StatusFilter",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+          "line": 6
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "line": 6,
+      "inferred": false
+    },
+    {
+      "name": "OrderStatusBadgeProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "status",
+          "type_raw": "Order[\"status\"]",
+          "kind": "any",
+          "required": true,
+          "enum": [],
+          "ref": "",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+          "line": 3
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+      "line": 3,
+      "inferred": false
+    },
+    {
+      "name": "OrderSummaryProps",
+      "kind": "interface",
+      "fields": [
+        {
+          "name": "order",
+          "type_raw": "Order",
+          "kind": "ref",
+          "required": true,
+          "enum": [],
+          "ref": "Order",
+          "children": [],
+          "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+          "line": 3
+        }
+      ],
+      "enum_values": [],
+      "source_file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "line": 3,
+      "inferred": false
+    }
+  ],
+  "mock_datasets": [
+    {
+      "name": "mockOrders",
+      "entity": "Order",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+      "annotation": "Order[]",
+      "records": 3,
+      "fields": [
+        {
+          "name": "id",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "ord-1001",
+            "ord-1002",
+            "ord-1003"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "customerName",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "Ada Lovelace",
+            "Grace Hopper",
+            "Alan Turing"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "customerEmail",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "ada@example.com",
+            "grace@example.com",
+            "alan@example.com"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "items",
+          "observed_types": [
+            "array"
+          ],
+          "samples": [
+            "[{\"id\": \"i-1\", \"name\": \"Mechanical keyboard\", \"…",
+            "[{\"id\": \"i-3\", \"name\": \"Compiler science mug\", …",
+            "[{\"id\": \"i-4\", \"name\": \"Enigma puzzle set\", \"pr…"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "status",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "pending",
+            "refunded",
+            "shipped"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "total",
+          "observed_types": [
+            "number"
+          ],
+          "samples": [
+            "139.99",
+            "55.5",
+            "48.71"
+          ],
+          "nullable": false,
+          "present_in": 3,
+          "records": 3
+        },
+        {
+          "name": "discountCode",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "SAVE10"
+          ],
+          "nullable": true,
+          "present_in": 1,
+          "records": 3
+        },
+        {
+          "name": "notes",
+          "observed_types": [
+            "string",
+            "null"
+          ],
+          "samples": [
+            "Leave at front desk"
+          ],
+          "nullable": true,
+          "present_in": 2,
+          "records": 3
+        },
+        {
+          "name": "createdAt",
+          "observed_types": [
+            "string"
+          ],
+          "samples": [
+            "2026-10-01T14:22:00Z",
+            "2026-10-18T09:05:00Z"
+          ],
+          "nullable": true,
+          "present_in": 2,
+          "records": 3
+        }
+      ]
+    }
+  ],
+  "api_calls": [
+    {
+      "file": "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts",
+      "line": 12,
+      "client": "supabase",
+      "method": "SELECT",
+      "target": "orders",
+      "snippet": ".from(\"orders\").select(\"*\").limit(50);"
+    },
+    {
+      "file": "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts",
+      "line": 17,
+      "client": "supabase",
+      "method": "UPDATE",
+      "target": "orders",
+      "snippet": ".from(\"orders\").update({ status }).eq(\"id\", id);"
+    }
+  ],
+  "components": [
+    {
+      "name": "OrderList",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+      "props": [
+        "filter"
+      ],
+      "imports": [
+        "../data/mock-orders -> src/data/mock-orders.ts",
+        "./OrderStatusBadge -> src/components/OrderStatusBadge.tsx",
+        "./OrderSummary -> src/components/OrderSummary.tsx",
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "OrderListProps",
+        "StatusFilter"
+      ],
+      "mock_used": [
+        "mockOrders"
+      ],
+      "api_used": [],
+      "field_accesses": [
+        "createdAt",
+        "customerEmail",
+        "customerName",
+        "filter",
+        "id",
+        "items",
+        "name",
+        "price",
+        "qty",
+        "status"
+      ]
+    },
+    {
+      "name": "OrderStatusBadge",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+      "props": [
+        "status"
+      ],
+      "imports": [
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "Order",
+        "OrderStatusBadgeProps"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": []
+    },
+    {
+      "name": "OrderSummary",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+      "props": [
+        "order"
+      ],
+      "imports": [
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "Order",
+        "OrderSummaryProps"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": [
+        "discountCode",
+        "items",
+        "notes",
+        "qty",
+        "total"
+      ]
+    },
+    {
+      "name": "OrdersPage",
+      "file": "/home/user/contract-harness/examples/lovable-app/src/pages/OrdersPage.tsx",
+      "props": [],
+      "imports": [
+        "react -> pkg:react",
+        "../components/OrderList -> src/components/OrderList.tsx",
+        "../types -> src/types"
+      ],
+      "contracts_used": [
+        "StatusFilter"
+      ],
+      "mock_used": [],
+      "api_used": [],
+      "field_accesses": []
+    }
+  ],
+  "target_entities": [
+    {
+      "name": "Customer",
+      "fields": [
+        {
+          "name": "customerId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "email",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "tier",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "bronze",
+            "silver",
+            "gold",
+            "platinum"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "Billing customer embedded on an order.",
+      "source": "openapi:/components/schemas/Customer"
+    },
+    {
+      "name": "OrderAmounts",
+      "fields": [
+        {
+          "name": "subtotal",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Sum of line totals before tax and discount.",
+          "rule_ids": []
+        },
+        {
+          "name": "tax",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Server-computed tax per BR-002.",
+          "rule_ids": []
+        },
+        {
+          "name": "discount",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Discount amount, 0 when ineligible per BR-004.",
+          "rule_ids": []
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "subtotal + tax - discount per BR-001.",
+          "rule_ids": []
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "USD",
+            "EUR",
+            "GBP"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "ISO 4217 code per BR-005.",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/OrderAmounts"
+    },
+    {
+      "name": "OrderLineItem",
+      "fields": [
+        {
+          "name": "lineId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "productId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "sku",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "quantity",
+          "type": "integer",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "unitPrice",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "lineTotal",
+          "type": "number",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/OrderLineItem"
+    },
+    {
+      "name": "Order",
+      "fields": [
+        {
+          "name": "orderId",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "uuid",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "customer",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "Customer",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "enum": [
+            "pending",
+            "paid",
+            "shipped",
+            "delivered",
+            "cancelled"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Lifecycle status; transitions guarded by BR-003.",
+          "rule_ids": []
+        },
+        {
+          "name": "lineItems",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "OrderLineItem",
+          "is_array": true,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "amounts",
+          "type": "object",
+          "required": true,
+          "enum": [],
+          "format": "",
+          "ref": "OrderAmounts",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "currency",
+          "type": "string",
+          "required": false,
+          "enum": [
+            "USD",
+            "EUR",
+            "GBP"
+          ],
+          "format": "",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "Top-level currency mirror per BR-005.",
+          "rule_ids": []
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "required": false,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": false,
+          "description": "",
+          "rule_ids": []
+        },
+        {
+          "name": "placedAt",
+          "type": "string",
+          "required": false,
+          "enum": [],
+          "format": "date-time",
+          "ref": "",
+          "is_array": false,
+          "nullable": true,
+          "description": "",
+          "rule_ids": []
+        }
+      ],
+      "description": "",
+      "source": "openapi:/components/schemas/Order"
+    }
+  ],
+  "target_endpoints": [
+    {
+      "method": "GET",
+      "path": "/orders",
+      "operation_id": "listOrders",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "operation_id": "createOrder",
+      "request_entity": "Order",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{orderId}",
+      "operation_id": "getOrder",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    },
+    {
+      "method": "PATCH",
+      "path": "/orders/{orderId}/status",
+      "operation_id": "updateOrderStatus",
+      "request_entity": "",
+      "response_entity": "Order",
+      "rule_ids": []
+    }
+  ],
+  "alignments": [
+    {
+      "ui_contract": "Order",
+      "target_entity": "Order",
+      "match_confidence": 1.0,
+      "field_mappings": [
+        {
+          "ui_field": "id",
+          "ui_type": "string",
+          "target_field": "orderId",
+          "target_type": "string",
+          "status": "FIELD_RENAME",
+          "note": "rename 'id' -> 'orderId'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "customerName",
+          "ui_type": "string",
+          "target_field": "customer",
+          "target_type": "object",
+          "status": "TYPE_MISMATCH",
+          "note": "rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "status",
+          "ui_type": "string",
+          "target_field": "status",
+          "target_type": "string",
+          "status": "ENUM_NOT_ENFORCED",
+          "note": "target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "items",
+          "ui_type": "OrderItem[]",
+          "target_field": "lineItems",
+          "target_type": "object[]",
+          "status": "FIELD_RENAME",
+          "note": "rename 'items' -> 'lineItems'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "amounts",
+          "target_type": "object",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "currency",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "createdAt",
+          "ui_type": "string",
+          "target_field": "createdAt",
+          "target_type": "string",
+          "status": "MATCH",
+          "note": "target format constraint: date-time (validate at boundary)",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "updatedAt",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "placedAt",
+          "target_type": "string",
+          "status": "OPTIONAL_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "customerEmail",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "total",
+          "ui_type": "number",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "discountCode",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        },
+        {
+          "ui_field": "notes",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "Order",
+          "field": "orderId",
+          "message": "rename 'id' -> 'orderId'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "TYPE_MISMATCH",
+          "entity": "Order",
+          "field": "customer",
+          "message": "customerName -> customer: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+          "evidence": [
+            "mock data in 3 records; samples=['Ada Lovelace', 'Grace Hopper', 'Alan Turing']; nullable=False",
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "ENUM_MISMATCH",
+          "entity": "Order",
+          "field": "status",
+          "message": "Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+          "evidence": [
+            "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+            "observed on field 'status'"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "ENUM_NOT_ENFORCED",
+          "entity": "Order",
+          "field": "status",
+          "message": "status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+          "evidence": [
+            "mock data in 3 records; samples=['pending', 'refunded', 'shipped']; nullable=False",
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "Order",
+          "field": "lineItems",
+          "message": "rename 'items' -> 'lineItems'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "Target field 'amounts' (object) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": [
+            "BR-001",
+            "BR-002",
+            "BR-004"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "currency",
+          "message": "Target field 'currency' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": [
+            "BR-005"
+          ]
+        },
+        {
+          "severity": "medium",
+          "code": "REQUIRED_NOT_ENFORCED",
+          "entity": "Order",
+          "field": "createdAt",
+          "message": "'createdAt' is required but mock data contains null/missing values.",
+          "evidence": [
+            "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "info",
+          "code": "FORMAT_CONSTRAINT",
+          "entity": "Order",
+          "field": "createdAt",
+          "message": "target format constraint: date-time (validate at boundary)",
+          "evidence": [
+            "mock data in 3 records; samples=['2026-10-01T14:22:00Z', '2026-10-18T09:05:00Z']; nullable=True"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "updatedAt",
+          "message": "Target field 'updatedAt' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "OPTIONAL_MISSING",
+          "entity": "Order",
+          "field": "placedAt",
+          "message": "Target field 'placedAt' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "customerEmail",
+          "message": "'customerEmail' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "total",
+          "message": "'total' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "discountCode",
+          "message": "'discountCode' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "Order",
+          "field": "notes",
+          "message": "'notes' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:9"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-001 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Order grand total reconciliation"
+          ],
+          "rule_ids": [
+            "BR-001"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-002 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Tax calculation"
+          ],
+          "rule_ids": [
+            "BR-002"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "status",
+          "message": "BR-003 requires 'status' but the UI currently has enum_not_enforced (status).",
+          "evidence": [
+            "rule: Order status transition guard"
+          ],
+          "rule_ids": [
+            "BR-003"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "amounts",
+          "message": "BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+          "evidence": [
+            "rule: Discount eligibility"
+          ],
+          "rule_ids": [
+            "BR-004"
+          ]
+        },
+        {
+          "severity": "high",
+          "code": "RULE_FIELD_GAP",
+          "entity": "Order",
+          "field": "currency",
+          "message": "BR-005 requires 'currency' but the UI currently has optional_missing (—).",
+          "evidence": [
+            "rule: Currency handling"
+          ],
+          "rule_ids": [
+            "BR-005"
+          ]
+        }
+      ]
+    },
+    {
+      "ui_contract": "OrderItem",
+      "target_entity": "OrderLineItem",
+      "match_confidence": 0.82,
+      "field_mappings": [
+        {
+          "ui_field": "id",
+          "ui_type": "string",
+          "target_field": "lineId",
+          "target_type": "string",
+          "status": "FIELD_RENAME",
+          "note": "rename 'id' -> 'lineId'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "productId",
+          "target_type": "string",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "sku",
+          "target_type": "string",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "qty",
+          "ui_type": "number",
+          "target_field": "quantity",
+          "target_type": "integer",
+          "status": "FIELD_RENAME",
+          "note": "rename 'qty' -> 'quantity'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "price",
+          "ui_type": "number",
+          "target_field": "unitPrice",
+          "target_type": "number",
+          "status": "FIELD_RENAME",
+          "note": "rename 'price' -> 'unitPrice'",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "—",
+          "ui_type": "—",
+          "target_field": "lineTotal",
+          "target_type": "number",
+          "status": "REQUIRED_MISSING",
+          "note": "not represented anywhere in the UI contract",
+          "required_in_target": true
+        },
+        {
+          "ui_field": "name",
+          "ui_type": "string",
+          "target_field": "—",
+          "target_type": "—",
+          "status": "UI_ONLY_FIELD",
+          "note": "dummy-only field: remove or map explicitly",
+          "required_in_target": false
+        }
+      ],
+      "findings": [
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "lineId",
+          "message": "rename 'id' -> 'lineId'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "productId",
+          "message": "Target field 'productId' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "sku",
+          "message": "Target field 'sku' (string) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "quantity",
+          "message": "rename 'qty' -> 'quantity'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "medium",
+          "code": "FIELD_RENAME",
+          "entity": "OrderLineItem",
+          "field": "unitPrice",
+          "message": "rename 'price' -> 'unitPrice'",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        },
+        {
+          "severity": "high",
+          "code": "REQUIRED_MISSING",
+          "entity": "OrderLineItem",
+          "field": "lineTotal",
+          "message": "Target field 'lineTotal' (number) is not represented in the UI.",
+          "evidence": [],
+          "rule_ids": []
+        },
+        {
+          "severity": "low",
+          "code": "UI_ONLY_FIELD",
+          "entity": "OrderLineItem",
+          "field": "name",
+          "message": "'name' exists only in UI dummy data and has no target contract field.",
+          "evidence": [
+            "/home/user/contract-harness/examples/lovable-app/src/types/index.ts:2"
+          ],
+          "rule_ids": []
+        }
+      ]
+    }
+  ],
+  "unmatched_ui": [
+    "StatusFilter",
+    "OrderListProps",
+    "OrderStatusBadgeProps",
+    "OrderSummaryProps"
+  ],
+  "unmatched_target": [
+    "Customer",
+    "OrderAmounts"
+  ],
+  "specs": [
+    {
+      "spec_id": "SPEC-E01",
+      "title": "Align Order with target contract Order",
+      "scope": "entity",
+      "target_entity": "Order",
+      "current_state": "UI contract `Order` (declared) matched target `Order` with confidence 1.0. 20 finding(s).",
+      "target_state": "Implement `Order` exactly as defined in openapi:/components/schemas/Order (9 fields).",
+      "changes": [
+        "Rename `id` to `orderId` (type stays compatible).",
+        "Introduce an adapter for `customerName` -> `customer`: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+        "Constrain `status` to the target enum and update badge/select logic: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+        "Rename `items` to `lineItems` (type stays compatible).",
+        "Add `amounts: object` (required) and surface it in the UI.",
+        "Add `currency: string` (optional) and surface it in the UI.",
+        "Add `updatedAt: string` (optional) and surface it in the UI.",
+        "Add `placedAt: string` (optional) and surface it in the UI.",
+        "Remove or explicitly remap dummy-only field `customerEmail`.",
+        "Remove or explicitly remap dummy-only field `total`.",
+        "Remove or explicitly remap dummy-only field `discountCode`.",
+        "Remove or explicitly remap dummy-only field `notes`."
+      ],
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+      ],
+      "acceptance_criteria": [
+        "All target enum values are rendered; unknown values fall back safely.",
+        "BR-001: given a missing amounts object, when the order renders, then a safe placeholder is shown",
+        "BR-001: given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+        "BR-002: given any order, when displayed, then the tax value shown is exactly the value from the contract payload",
+        "BR-003: given a delivered order, when acting on it, then no transitions are offered",
+        "BR-003: given a pending order, when acting on it, then only paid and cancelled are offered",
+        "BR-003: given an unknown status value, when rendering, then a fallback badge is shown without crashing",
+        "BR-004: given a gold customer, when a discount is applied, then amounts.discount is reflected in the total",
+        "BR-004: given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+        "BR-005: given a missing currency, when totals render, then USD is assumed",
+        "BR-005: given currency USD, when totals render, then they use USD currency formatting",
+        "Component renders a non-crashing value for `amounts` for empty, loading and populated states.",
+        "Component renders a non-crashing value for `currency` for empty, loading and populated states.",
+        "Component renders a non-crashing value for `placedAt` for empty, loading and populated states.",
+        "Component renders a non-crashing value for `updatedAt` for empty, loading and populated states.",
+        "No remaining reference to legacy field `id`.",
+        "No remaining reference to legacy field `items`.",
+        "Unit test covers conversion `customerName` -> `customer`."
+      ],
+      "rule_ids": [
+        "BR-001",
+        "BR-002",
+        "BR-003",
+        "BR-004",
+        "BR-005"
+      ],
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004"
+      ],
+      "evidence": [
+        "FIELD_RENAME: rename 'id' -> 'orderId'",
+        "TYPE_MISMATCH: customerName -> customer: rename 'customerName' -> 'customer'; UI type 'string' vs target object",
+        "ENUM_MISMATCH: Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+        "ENUM_NOT_ENFORCED: status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+        "FIELD_RENAME: rename 'items' -> 'lineItems'",
+        "REQUIRED_MISSING: Target field 'amounts' (object) is not represented in the UI.",
+        "OPTIONAL_MISSING: Target field 'currency' (string) is not represented in the UI.",
+        "REQUIRED_NOT_ENFORCED: 'createdAt' is required but mock data contains null/missing values.",
+        "FORMAT_CONSTRAINT: target format constraint: date-time (validate at boundary)",
+        "OPTIONAL_MISSING: Target field 'updatedAt' (string) is not represented in the UI.",
+        "OPTIONAL_MISSING: Target field 'placedAt' (string) is not represented in the UI.",
+        "UI_ONLY_FIELD: 'customerEmail' exists only in UI dummy data and has no target contract field.",
+        "UI_ONLY_FIELD: 'total' exists only in UI dummy data and has no target contract field.",
+        "UI_ONLY_FIELD: 'discountCode' exists only in UI dummy data and has no target contract field.",
+        "UI_ONLY_FIELD: 'notes' exists only in UI dummy data and has no target contract field.",
+        "RULE_FIELD_GAP: BR-001 requires 'amounts' but the UI currently has required_missing (—).",
+        "RULE_FIELD_GAP: BR-002 requires 'amounts' but the UI currently has required_missing (—).",
+        "RULE_FIELD_GAP: BR-003 requires 'status' but the UI currently has enum_not_enforced (status).",
+        "RULE_FIELD_GAP: BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+        "RULE_FIELD_GAP: BR-005 requires 'currency' but the UI currently has optional_missing (—)."
+      ]
+    },
+    {
+      "spec_id": "SPEC-E02",
+      "title": "Align OrderItem with target contract OrderLineItem",
+      "scope": "entity",
+      "target_entity": "OrderLineItem",
+      "current_state": "UI contract `OrderItem` (declared) matched target `OrderLineItem` with confidence 0.82. 7 finding(s).",
+      "target_state": "Implement `OrderLineItem` exactly as defined in openapi:/components/schemas/OrderLineItem (6 fields).",
+      "changes": [
+        "Rename `id` to `lineId` (type stays compatible).",
+        "Add `productId: string` (required) and surface it in the UI.",
+        "Add `sku: string` (required) and surface it in the UI.",
+        "Rename `qty` to `quantity` (type stays compatible).",
+        "Rename `price` to `unitPrice` (type stays compatible).",
+        "Add `lineTotal: number` (required) and surface it in the UI.",
+        "Remove or explicitly remap dummy-only field `name`."
+      ],
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+      ],
+      "acceptance_criteria": [
+        "Component renders a non-crashing value for `lineTotal` for empty, loading and populated states.",
+        "Component renders a non-crashing value for `productId` for empty, loading and populated states.",
+        "Component renders a non-crashing value for `sku` for empty, loading and populated states.",
+        "No remaining reference to legacy field `id`.",
+        "No remaining reference to legacy field `price`.",
+        "No remaining reference to legacy field `qty`."
+      ],
+      "rule_ids": [],
+      "requirement_ids": [],
+      "evidence": [
+        "FIELD_RENAME: rename 'id' -> 'lineId'",
+        "REQUIRED_MISSING: Target field 'productId' (string) is not represented in the UI.",
+        "REQUIRED_MISSING: Target field 'sku' (string) is not represented in the UI.",
+        "FIELD_RENAME: rename 'qty' -> 'quantity'",
+        "FIELD_RENAME: rename 'price' -> 'unitPrice'",
+        "REQUIRED_MISSING: Target field 'lineTotal' (number) is not represented in the UI.",
+        "UI_ONLY_FIELD: 'name' exists only in UI dummy data and has no target contract field."
+      ]
+    },
+    {
+      "spec_id": "SPEC-C01",
+      "title": "Migrate component OrderList to live contracts",
+      "scope": "component",
+      "target_entity": "",
+      "current_state": "OrderList uses mock data=['mockOrders'], api=none, contracts=['OrderListProps', 'StatusFilter'].",
+      "target_state": "Component is presentational; data arrives via typed query hooks.",
+      "changes": [
+        "Remove mock import(s) mockOrders and source data from the real API client / query hook instead.",
+        "Update field access `id` -> `orderId` on Order (FIELD_RENAME).",
+        "Update field access `id` -> `lineId` on OrderLineItem (FIELD_RENAME).",
+        "Update field access `customerName` -> `customer` on Order (TYPE_MISMATCH).",
+        "Update field access `items` -> `lineItems` on Order (FIELD_RENAME).",
+        "Update field access `qty` -> `quantity` on OrderLineItem (FIELD_RENAME).",
+        "Update field access `price` -> `unitPrice` on OrderLineItem (FIELD_RENAME).",
+        "Add loading, error and empty states (mock data never exercises them)."
+      ],
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx"
+      ],
+      "acceptance_criteria": [
+        "Renders against a real-contract fixture without dummy imports.",
+        "Loading, error and empty states verified."
+      ],
+      "rule_ids": [],
+      "requirement_ids": [],
+      "evidence": [
+        "props: filter"
+      ]
+    },
+    {
+      "spec_id": "SPEC-X01",
+      "title": "Align API client layer with target endpoints",
+      "scope": "cross_cutting",
+      "target_entity": "",
+      "current_state": "Detected 2 call site(s); 4 target endpoint(s).",
+      "target_state": "Typed client functions covering every target endpoint with contract-validated IO.",
+      "changes": [
+        "Add typed client call for GET /orders (entity: Order).",
+        "Add typed client call for POST /orders (entity: Order).",
+        "Add typed client call for GET /orders/{orderId} (entity: Order).",
+        "Add typed client call for PATCH /orders/{orderId}/status (entity: Order)."
+      ],
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+      ],
+      "acceptance_criteria": [
+        "Each target endpoint has exactly one typed client function.",
+        "Runtime schema validation (zod/valibot or equivalent) on every response."
+      ],
+      "rule_ids": [],
+      "requirement_ids": [],
+      "evidence": []
+    },
+    {
+      "spec_id": "SPEC-R01",
+      "title": "Implement business rule BR-001 — Order grand total reconciliation",
+      "scope": "cross_cutting",
+      "target_entity": "Order",
+      "current_state": "The order grand total must equal subtotal plus tax minus discount. The UI must render the server-computed amounts rather than recomputing them client-side.",
+      "target_state": "Rule BR-001 enforced and covered by automated tests.",
+      "changes": [
+        "Encode BR-001 in the domain/adapter layer (keep it out of presentational components).",
+        "Required fields: Order.amounts."
+      ],
+      "files": [],
+      "acceptance_criteria": [
+        "given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+        "given a missing amounts object, when the order renders, then a safe placeholder is shown"
+      ],
+      "rule_ids": [
+        "BR-001"
+      ],
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "evidence": [
+        "Target field 'amounts' (object) is not represented in the UI.",
+        "BR-001 requires 'amounts' but the UI currently has required_missing (—)."
+      ]
+    },
+    {
+      "spec_id": "SPEC-R02",
+      "title": "Implement business rule BR-002 — Tax calculation",
+      "scope": "cross_cutting",
+      "target_entity": "Order",
+      "current_state": "Tax is computed by the billing service at the prevailing rate on (subtotal minus discount); the UI never calculates tax itself.",
+      "target_state": "Rule BR-002 enforced and covered by automated tests.",
+      "changes": [
+        "Encode BR-002 in the domain/adapter layer (keep it out of presentational components).",
+        "Required fields: Order.amounts."
+      ],
+      "files": [],
+      "acceptance_criteria": [
+        "given any order, when displayed, then the tax value shown is exactly the value from the contract payload"
+      ],
+      "rule_ids": [
+        "BR-002"
+      ],
+      "requirement_ids": [
+        "REQ-004",
+        "REQ-005"
+      ],
+      "evidence": [
+        "BR-002 requires 'amounts' but the UI currently has required_missing (—)."
+      ]
+    },
+    {
+      "spec_id": "SPEC-R03",
+      "title": "Implement business rule BR-003 — Order status transition guard",
+      "scope": "cross_cutting",
+      "target_entity": "Order",
+      "current_state": "Allowed transitions are pending -> paid -> shipped -> delivered. An order may be cancelled only from pending or paid. Any other transition is rejected.",
+      "target_state": "Rule BR-003 enforced and covered by automated tests.",
+      "changes": [
+        "Encode BR-003 in the domain/adapter layer (keep it out of presentational components).",
+        "Required fields: Order.status."
+      ],
+      "files": [],
+      "acceptance_criteria": [
+        "given a pending order, when acting on it, then only paid and cancelled are offered",
+        "given a delivered order, when acting on it, then no transitions are offered",
+        "given an unknown status value, when rendering, then a fallback badge is shown without crashing"
+      ],
+      "rule_ids": [
+        "BR-003"
+      ],
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004"
+      ],
+      "evidence": [
+        "Mock values ['refunded'] fall outside target enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled'].",
+        "status -> status: target restricts to enum ['pending', 'paid', 'shipped', 'delivered', 'cancelled']; UI has no union type",
+        "BR-003 requires 'status' but the UI currently has enum_not_enforced (status)."
+      ]
+    },
+    {
+      "spec_id": "SPEC-R04",
+      "title": "Implement business rule BR-004 — Discount eligibility",
+      "scope": "cross_cutting",
+      "target_entity": "Order, Customer",
+      "current_state": "A discount may be applied only when the linked customer's tier is `gold` or `platinum`; silver and bronze customers are ineligible.",
+      "target_state": "Rule BR-004 enforced and covered by automated tests.",
+      "changes": [
+        "Encode BR-004 in the domain/adapter layer (keep it out of presentational components).",
+        "Required fields: Order.amounts, Customer.tier."
+      ],
+      "files": [],
+      "acceptance_criteria": [
+        "given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+        "given a gold customer, when a discount is applied, then amounts.discount is reflected in the total"
+      ],
+      "rule_ids": [
+        "BR-004"
+      ],
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-004",
+        "REQ-005"
+      ],
+      "evidence": [
+        "BR-004 requires 'amounts' but the UI currently has required_missing (—).",
+        "BR-004 applies to 'Customer', which has no matching UI contract or mock data yet."
+      ]
+    },
+    {
+      "spec_id": "SPEC-R05",
+      "title": "Implement business rule BR-005 — Currency handling",
+      "scope": "cross_cutting",
+      "target_entity": "Order",
+      "current_state": "All monetary values are expressed using an ISO 4217 currency code; `USD` is the default when the backend omits the field. Money is formatted with that code.",
+      "target_state": "Rule BR-005 enforced and covered by automated tests.",
+      "changes": [
+        "Encode BR-005 in the domain/adapter layer (keep it out of presentational components).",
+        "Required fields: Order.currency."
+      ],
+      "files": [],
+      "acceptance_criteria": [
+        "given currency USD, when totals render, then they use USD currency formatting",
+        "given a missing currency, when totals render, then USD is assumed"
+      ],
+      "rule_ids": [
+        "BR-005"
+      ],
+      "requirement_ids": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-004"
+      ],
+      "evidence": [
+        "Target field 'currency' (string) is not represented in the UI.",
+        "BR-005 requires 'currency' but the UI currently has optional_missing (—)."
+      ]
+    }
+  ],
+  "plan": [
+    {
+      "task_id": "T-001",
+      "phase": "01-contract-freeze",
+      "title": "Snapshot target contracts and scaffold contract tests",
+      "description": "Vendor the target schemas (OpenAPI/JSON) into the repo and generate TypeScript types plus response validators so every later phase has a single source of truth.",
+      "files": [
+        "src/contracts/ (new)",
+        "tests/contract/ (new)"
+      ],
+      "depends_on": [],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "Generated types compile with no errors.",
+        "A sample fixture fails validation when intentionally corrupted."
+      ],
+      "refs": [
+        "SPEC-X01"
+      ]
+    },
+    {
+      "task_id": "T-002",
+      "phase": "02-types-and-adapters",
+      "title": "Rebuild Order types and add a mock→contract adapter",
+      "description": "Replace the UI's Order shape with the target Order contract and centralize field renames, type coercions and enum mapping in one adapter function so components stay declarative.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderStatusBadge.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+      ],
+      "depends_on": [
+        "T-001"
+      ],
+      "effort": "L",
+      "risk": "L",
+      "acceptance": [
+        "Adapter maps every legacy Order field to Order (exhaustive switch).",
+        "Adapter unit tests cover nulls, unknown enum values and missing optional fields."
+      ],
+      "refs": [
+        "SPEC-E01"
+      ]
+    },
+    {
+      "task_id": "T-003",
+      "phase": "02-types-and-adapters",
+      "title": "Rebuild OrderLineItem types and add a mock→contract adapter",
+      "description": "Replace the UI's OrderItem shape with the target OrderLineItem contract and centralize field renames, type coercions and enum mapping in one adapter function so components stay declarative.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderSummary.tsx",
+        "/home/user/contract-harness/examples/lovable-app/src/types/index.ts"
+      ],
+      "depends_on": [
+        "T-001"
+      ],
+      "effort": "L",
+      "risk": "L",
+      "acceptance": [
+        "Adapter maps every legacy OrderItem field to OrderLineItem (exhaustive switch).",
+        "Adapter unit tests cover nulls, unknown enum values and missing optional fields."
+      ],
+      "refs": [
+        "SPEC-E02"
+      ]
+    },
+    {
+      "task_id": "T-004",
+      "phase": "03-api-client",
+      "title": "Add typed client for GET /orders",
+      "description": "Create one typed client function with runtime response validation; wire query keys/caching consistent with the existing data layer.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+      ],
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "Calling listOrders returns a validated Order type.",
+        "Network and validation errors surface through a typed error channel."
+      ],
+      "refs": [
+        "SPEC-X01"
+      ]
+    },
+    {
+      "task_id": "T-005",
+      "phase": "03-api-client",
+      "title": "Add typed client for POST /orders",
+      "description": "Create one typed client function with runtime response validation; wire query keys/caching consistent with the existing data layer.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+      ],
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "Calling createOrder returns a validated Order type.",
+        "Network and validation errors surface through a typed error channel."
+      ],
+      "refs": [
+        "SPEC-X01"
+      ]
+    },
+    {
+      "task_id": "T-006",
+      "phase": "03-api-client",
+      "title": "Add typed client for GET /orders/{orderId}",
+      "description": "Create one typed client function with runtime response validation; wire query keys/caching consistent with the existing data layer.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+      ],
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "Calling getOrder returns a validated Order type.",
+        "Network and validation errors surface through a typed error channel."
+      ],
+      "refs": [
+        "SPEC-X01"
+      ]
+    },
+    {
+      "task_id": "T-007",
+      "phase": "03-api-client",
+      "title": "Add typed client for PATCH /orders/{orderId}/status",
+      "description": "Create one typed client function with runtime response validation; wire query keys/caching consistent with the existing data layer.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/lib/api.ts"
+      ],
+      "depends_on": [
+        "T-001",
+        "T-002"
+      ],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "Calling updateOrderStatus returns a validated Order type.",
+        "Network and validation errors surface through a typed error channel."
+      ],
+      "refs": [
+        "SPEC-X01"
+      ]
+    },
+    {
+      "task_id": "T-008",
+      "phase": "04-component-migration",
+      "title": "Migrate OrderList to live data and target field names",
+      "description": "Remove mock import(s) mockOrders and source data from the real API client / query hook instead.; Update field access `id` -> `orderId` on Order (FIELD_RENAME).; Update field access `id` -> `lineId` on OrderLineItem (FIELD_RENAME). …",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/components/OrderList.tsx"
+      ],
+      "depends_on": [
+        "T-002",
+        "T-003",
+        "T-005",
+        "T-006",
+        "T-007"
+      ],
+      "effort": "L",
+      "risk": "M",
+      "acceptance": [
+        "Renders against a real-contract fixture without dummy imports.",
+        "Loading, error and empty states verified."
+      ],
+      "refs": [
+        "SPEC-C01"
+      ]
+    },
+    {
+      "task_id": "T-009",
+      "phase": "05-business-rules",
+      "title": "Enforce BR-001 in the domain layer",
+      "description": "The order grand total must equal subtotal plus tax minus discount. The UI must render the server-computed amounts rather than recomputing them client-side.",
+      "files": [],
+      "depends_on": [
+        "T-002"
+      ],
+      "effort": "M",
+      "risk": "L",
+      "acceptance": [
+        "given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+        "given a missing amounts object, when the order renders, then a safe placeholder is shown"
+      ],
+      "refs": [
+        "SPEC-R01",
+        "BR-001"
+      ]
+    },
+    {
+      "task_id": "T-010",
+      "phase": "05-business-rules",
+      "title": "Enforce BR-002 in the domain layer",
+      "description": "Tax is computed by the billing service at the prevailing rate on (subtotal minus discount); the UI never calculates tax itself.",
+      "files": [],
+      "depends_on": [
+        "T-002"
+      ],
+      "effort": "M",
+      "risk": "L",
+      "acceptance": [
+        "given any order, when displayed, then the tax value shown is exactly the value from the contract payload"
+      ],
+      "refs": [
+        "SPEC-R02",
+        "BR-002"
+      ]
+    },
+    {
+      "task_id": "T-011",
+      "phase": "05-business-rules",
+      "title": "Enforce BR-003 in the domain layer",
+      "description": "Allowed transitions are pending -> paid -> shipped -> delivered. An order may be cancelled only from pending or paid. Any other transition is rejected.",
+      "files": [],
+      "depends_on": [
+        "T-002"
+      ],
+      "effort": "M",
+      "risk": "L",
+      "acceptance": [
+        "given a pending order, when acting on it, then only paid and cancelled are offered",
+        "given a delivered order, when acting on it, then no transitions are offered",
+        "given an unknown status value, when rendering, then a fallback badge is shown without crashing"
+      ],
+      "refs": [
+        "SPEC-R03",
+        "BR-003"
+      ]
+    },
+    {
+      "task_id": "T-012",
+      "phase": "05-business-rules",
+      "title": "Enforce BR-004 in the domain layer",
+      "description": "A discount may be applied only when the linked customer's tier is `gold` or `platinum`; silver and bronze customers are ineligible.",
+      "files": [],
+      "depends_on": [
+        "T-002"
+      ],
+      "effort": "M",
+      "risk": "L",
+      "acceptance": [
+        "given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+        "given a gold customer, when a discount is applied, then amounts.discount is reflected in the total"
+      ],
+      "refs": [
+        "SPEC-R04",
+        "BR-004"
+      ]
+    },
+    {
+      "task_id": "T-013",
+      "phase": "05-business-rules",
+      "title": "Enforce BR-005 in the domain layer",
+      "description": "All monetary values are expressed using an ISO 4217 currency code; `USD` is the default when the backend omits the field. Money is formatted with that code.",
+      "files": [],
+      "depends_on": [
+        "T-002"
+      ],
+      "effort": "M",
+      "risk": "L",
+      "acceptance": [
+        "given currency USD, when totals render, then they use USD currency formatting",
+        "given a missing currency, when totals render, then USD is assumed"
+      ],
+      "refs": [
+        "SPEC-R05",
+        "BR-005"
+      ]
+    },
+    {
+      "task_id": "T-014",
+      "phase": "06-cleanup",
+      "title": "Delete dummy data module /home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts",
+      "description": "Remove the mock module and any re-exports once every consuming component reads live data. Search the repo for the const names to confirm zero references.",
+      "files": [
+        "/home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts"
+      ],
+      "depends_on": [
+        "T-008"
+      ],
+      "effort": "S",
+      "risk": "S",
+      "acceptance": [
+        "No import of /home/user/contract-harness/examples/lovable-app/src/data/mock-orders.ts remains; production build succeeds."
+      ],
+      "refs": [
+        "SPEC-E01"
+      ]
+    },
+    {
+      "task_id": "T-015",
+      "phase": "07-verification",
+      "title": "Contract, rule and visual verification",
+      "description": "Run the full verification sweep: contract tests against recorded fixtures, business-rule tests with violation cases, and visual QA of loading/empty/error states on every migrated screen.",
+      "files": [],
+      "depends_on": [
+        "T-008",
+        "T-009",
+        "T-010",
+        "T-011",
+        "T-012",
+        "T-013",
+        "T-014"
+      ],
+      "effort": "M",
+      "risk": "S",
+      "acceptance": [
+        "All contract tests pass against target fixtures.",
+        "Every business rule has at least one happy-path and one violation test.",
+        "No dummy data references remain in the codebase.",
+        "Migrated screens verified for loading, empty and error states."
+      ],
+      "refs": [
+        "SPEC-E01",
+        "SPEC-E02",
+        "SPEC-C01",
+        "SPEC-X01",
+        "SPEC-R01",
+        "SPEC-R02",
+        "SPEC-R03",
+        "SPEC-R04",
+        "SPEC-R05"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "title": "View the order list",
+      "body": "As an ops user I need a list of all orders so I can see what is in the pipeline.\n\n- [ ] The list shows every order returned by `GET /orders`, newest first\n- [ ] Each row shows order id, customer name, status and the grand total\n- [ ] Orders can be filtered by status using the full backend status enum",
+      "acceptance": [
+        "The list shows every order returned by `GET /orders`, newest first",
+        "Each row shows order id, customer name, status and the grand total",
+        "Orders can be filtered by status using the full backend status enum"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-002",
+      "title": "Inspect an order's detail",
+      "body": "As an ops user I need to drill into an Order to see its customer, line items and money breakdown.\n\n- [ ] Detail view shows the nested customer object, all line items and the `amounts` breakdown\n- [ ] Line items show SKU, quantity, unit price and line total",
+      "acceptance": [
+        "Detail view shows the nested customer object, all line items and the `amounts` breakdown",
+        "Line items show SKU, quantity, unit price and line total"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-003",
+      "title": "Manage the order status workflow",
+      "body": "As an ops user I need to move an Order through its lifecycle without violating allowed transitions.\n\n- [ ] Only legal status transitions for the current status are offered as actions\n- [ ] A cancelled order shows a distinct badge and cannot be re-opened",
+      "acceptance": [
+        "Only legal status transitions for the current status are offered as actions",
+        "A cancelled order shows a distinct badge and cannot be re-opened"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-004",
+      "title": "Display the money breakdown including tax",
+      "body": "As an ops user I need subtotal, tax, discount and total shown separately.\n\n- [ ] All four amounts from `Order.amounts` are rendered with ISO currency formatting\n- [ ] Totals reconcile to the business-rule calculation",
+      "acceptance": [
+        "All four amounts from `Order.amounts` are rendered with ISO currency formatting",
+        "Totals reconcile to the business-rule calculation"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    },
+    {
+      "id": "REQ-005",
+      "title": "Apply discount eligibility for premium customers",
+      "body": "As a billing user I need discounts restricted to customers whose tier allows them.\n\n- [ ] Discount controls are disabled unless the customer tier is `gold` or `platinum`\n- [ ] Attempting an ineligible discount surfaces a validation error referencing the rule",
+      "acceptance": [
+        "Discount controls are disabled unless the customer tier is `gold` or `platinum`",
+        "Attempting an ineligible discount surfaces a validation error referencing the rule"
+      ],
+      "source_file": "/home/user/contract-harness/examples/requirements.md"
+    }
+  ],
+  "rules": [
+    {
+      "id": "BR-001",
+      "title": "Order grand total reconciliation",
+      "description": "The order grand total must equal subtotal plus tax minus discount. The UI must render the server-computed amounts rather than recomputing them client-side.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.amounts"
+      ],
+      "acceptance": [
+        "given an Order with subtotal, tax and discount, when the summary renders, then total equals subtotal + tax - discount",
+        "given a missing amounts object, when the order renders, then a safe placeholder is shown"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-002",
+      "title": "Tax calculation",
+      "description": "Tax is computed by the billing service at the prevailing rate on (subtotal minus discount); the UI never calculates tax itself.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.amounts"
+      ],
+      "acceptance": [
+        "given any order, when displayed, then the tax value shown is exactly the value from the contract payload"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-003",
+      "title": "Order status transition guard",
+      "description": "Allowed transitions are pending -> paid -> shipped -> delivered. An order may be cancelled only from pending or paid. Any other transition is rejected.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.status"
+      ],
+      "acceptance": [
+        "given a pending order, when acting on it, then only paid and cancelled are offered",
+        "given a delivered order, when acting on it, then no transitions are offered",
+        "given an unknown status value, when rendering, then a fallback badge is shown without crashing"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-004",
+      "title": "Discount eligibility",
+      "description": "A discount may be applied only when the linked customer's tier is `gold` or `platinum`; silver and bronze customers are ineligible.",
+      "applies_to": [
+        "Order",
+        "Customer"
+      ],
+      "requires_fields": [
+        "Order.amounts",
+        "Customer.tier"
+      ],
+      "acceptance": [
+        "given a silver customer, when an operator tries a discount, then the action is blocked with a rule reference",
+        "given a gold customer, when a discount is applied, then amounts.discount is reflected in the total"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    },
+    {
+      "id": "BR-005",
+      "title": "Currency handling",
+      "description": "All monetary values are expressed using an ISO 4217 currency code; `USD` is the default when the backend omits the field. Money is formatted with that code.",
+      "applies_to": [
+        "Order"
+      ],
+      "requires_fields": [
+        "Order.currency"
+      ],
+      "acceptance": [
+        "given currency USD, when totals render, then they use USD currency formatting",
+        "given a missing currency, when totals render, then USD is assumed"
+      ],
+      "source_file": "/home/user/contract-harness/examples/business-rules.md"
+    }
+  ]
+}

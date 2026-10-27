@@ -1,0 +1,1 @@
+"""Spec generation stage."""
